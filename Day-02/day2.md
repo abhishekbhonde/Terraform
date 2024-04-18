@@ -10,11 +10,11 @@
 
 
 
-    ```hcl
+ ```hcl
     <BLOCK TYPE> "<Parameters>" {
         <Arguments>
     }
-    ```
+ ```
 
 - Lets write a simple terrafomr code in hcl for resource creation for aws_instacne
 
