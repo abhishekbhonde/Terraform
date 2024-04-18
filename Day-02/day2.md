@@ -70,4 +70,4 @@ resource "aws_ec2_instance" "my_instance" {
     ```
     This is main.tf file
 
-    resource "aws_ec2_instance"
+    resource "aws_ec2_instance" "my_instance"{}
