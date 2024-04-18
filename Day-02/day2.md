@@ -10,7 +10,7 @@
 
 
 
-    ```
+    ```hcl
     <BLOCK TYPE> "<Parameters>" {
         <Arguments>
     }
@@ -18,7 +18,7 @@
 
 - Lets write a simple terrafomr code in hcl for resource creation for aws_instacne
 
-```
+```hcl
 resource "aws_ec2_instance" "my_instance" {
         ami = <ami_id>
         instance_type = "t2.micro"
@@ -35,7 +35,7 @@ resource "aws_ec2_instance" "my_instance" {
 
 
  - for creating instance using above code you need to write provider code also.
-  ```
+  ```hcl
   provider "aws" {
     region = "<region>"
   }
@@ -48,9 +48,9 @@ resource "aws_ec2_instance" "my_instance" {
 
     All the variables that we are going to use in our terraform are stored in separate file call variables.tf(you can rename it as you want).
 
-    ```
+    ```hcl
    - Lets write a variables.tf file for creating aws_instance.
-
+     
         variable "my_ami"{_
             type=string
             description="This is ami_id for creating ec2 instance"
@@ -67,7 +67,49 @@ resource "aws_ec2_instance" "my_instance" {
 
  -  let's use above variables.tf file for creating ec2 instance in main.tf 
   
-    ```
+    ```hcl
     This is main.tf file
+    
+    resource "aws_ec2_instance" "my_instance"{
+            ami = var.ami  /// var is a keyword which is used to access the variables.
+            type = var.instance_type
 
-    resource "aws_ec2_instance" "my_instance"{}
+            tags = {
+                Name = var.instance_name
+            }
+    }
+
+    ```
+### Task 3: Practice writing Terraform configurations using HCL syntax
+
+- Lets write configuration for creating docker container which pulls image from dockerhub.
+  
+  ```hcl
+  - provider.tf
+
+    terraform {
+         required_providers {
+             docker = {
+               source = "kreuzwerker/docker"
+               version = "3.0.2"
+             }
+        }
+    }
+
+  ```
+
+  ```hcl
+  - main.tf
+    // pull image
+    resource "docker_image""node_todo_image" {
+        name: "abhishekbhonde/node-app" // copy the name of image from dockerhub 
+        keep_locally = false   // delete image after downloading
+    }
+    
+    //
+
+
+
+  ```
+
+
