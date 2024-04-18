@@ -105,8 +105,17 @@ resource "aws_ec2_instance" "my_instance" {
         name: "abhishekbhonde/node-app" // copy the name of image from dockerhub 
         keep_locally = false   // delete image after downloading
     }
-    
-    //
+
+    // create container
+    resource "docker_container" "node_container" {
+        image = docker_image.node_todo_image.name
+        name = node_container_image
+
+        ports {
+            internal = 3000  // this is the containers port.
+            external = 3000 // this is the machine port.
+        }
+    }
 
 
 
